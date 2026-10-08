@@ -390,3 +390,56 @@ video,
 .is-hidden {
     display: none !important;
 }
+
+/* 1. ページ全体を画面いっぱいに固定 */
+html, body {
+    width: 100vw !important;
+    height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    position: relative !important;
+}
+
+/* 2. AR.jsが裏で勝手に作るカメラ映像（video/canvas）を画面全体に敷き詰める */
+body > video, 
+body > canvas,
+.a-canvas {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    object-fit: cover !important;
+    z-index: 1 !important; /* カメラは一番奥 */
+}
+
+/* 3. 説明画面（Nextを押す前の画面）を画面の中央最前面に強制固定 */
+#explanation-screen {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 99999 !important; /* カメラより絶対手前 */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background-color: #60a5fa !important; /* 背景色でカメラを一旦隠す */
+}
+
+/* 4. 戻るボタン・解放動画ボタンも最前面に固定 */
+.btn-back {
+    position: fixed !important;
+    top: 20px !important;
+    left: 20px !important;
+    z-index: 2147483647 !important; /* 最前面 */
+}
+
+.btn-collection {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 2147483647 !important; /* 最前面 */
+}
